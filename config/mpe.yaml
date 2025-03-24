@@ -1,0 +1,10 @@
+# Environment settings
+env:
+  name: "mpe"
+  data_dir: "data/mpe"
+  env_kwargs:
+    grid_size: 10
+    num_agents: 3
+    num_obstacles: 0
+    max_steps: 100
+    search_depth: 30 # this will change the starting position of the player
