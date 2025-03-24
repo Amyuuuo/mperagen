@@ -1,0 +1,101 @@
+{
+  "data_source": "sokoban",
+  "prompt": [
+    {
+      "element": {
+        "content": "<|im_start|>user
+You are agent 0 in a multi-agent navigation system.
+
+Multi-Goal Navigation Task Guide:
+Objective: All agents need to collaborate, with each agent reaching a goal point, while avoiding collisions with other agents and obstacles.
+
+Symbol Legend:
+. Empty space | # Obstacle | O Goal point | A Yourself | B Other agents
+Å You on a goal point | Ḃ Other agent on a goal point
+
+#### Actions
+Each agent can perform one of these actions:
+- **Stay (0)**: Remain in the current position
+- **Left (1)**: Move one cell to the left
+- **Right (2)**: Move one cell to the right
+- **Down (3)**: Move one cell down
+- **Up (4)**: Move one cell up
+---
+
+### Reward Mechanism:
+- Each move: `-0.1` (penalty applied per step to encourage efficient movement)
+- Collision penalty: `-1.0` (penalty if an agent tries to occupy the same space as another agent or obstacle)
+- Reaching a goal point: `0` (reward for successfully reaching a goal)
+- All goal points occupied by agents: `10.0` (bonus reward when all agents reach their goals)
+- Distance penalty per step: `-0.1` (negative reward proportional to the remaining distance to the goal, encouraging shorter paths)
+
+[Current Observation]:
+{
+  'agent_0':
+  "..........
+  ..........
+  .....B....
+  ..........
+  O.........
+  ........A.
+  .O........
+  ..........
+  ...O.....B
+  ..........",
+
+  'agent_1':
+  "..........
+  ..........
+  .....A....
+  ..........
+  O.........
+  ........B.
+  .O........
+  ..........
+  ...O.....B
+  ..........",
+
+  'agent_2':
+  "..........
+  ..........
+  .....B....
+  ..........
+  O.........
+  ........B.
+  .O........
+  ..........
+  ...O.....A
+  .........."
+}
+
+Please decide your next action. Respond in the following format:
+<reasoning>
+...
+</reasoning>
+<answer>
+...
+</answer>
+
+Always output: <think> [Your thoughts] </think> <answer> [your answer] </answer> with no extra text. Strictly follow this format. <|im_end|>
+<|im_start|>assistant
+<think>",
+        "role": "user"
+      }
+    }
+  ],
+  "ability": "bfs",
+  "reward_model": {
+    "ground_truth": {
+      "numbers": [
+        { "element": 0 },
+        { "element": 0 }
+      ],
+      "target": 0
+    },
+    "style": "rule"
+  },
+  "extra_info": {
+    "index": 10000,
+    "split": "train"
+  }
+}
